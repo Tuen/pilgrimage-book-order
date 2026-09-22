@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Order the Turkey, Croatia & Medjugorje pilgrimage photobook by Justin Tan.">
+  <title>Journey of Grace — Pilgrimage Photobook</title>
+  <style>
+    :root {
+      --ink: #24312d;
+      --ink-soft: #53605a;
+      --cream: #f7f3ea;
+      --paper: #fffdf8;
+      --sand: #e8dfcf;
+      --terracotta: #b8654e;
+      --terracotta-dark: #934b3b;
+      --olive: #7d8761;
+      --olive-dark: #606a48;
+      --gold: #c69d55;
+      --line: #ded7c8;
+      --shadow: 0 18px 50px rgba(49, 44, 34, .12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .topline {
+      background: var(--ink);
+      color: #f4eee2;
+      text-align: center;
+      font-size: .76rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+    }
+    .shell { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+    header { padding: 24px 0; }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--ink);
+      text-decoration: none;
+      font-family: Georgia, serif;
+      font-size: 1.12rem;
+      letter-spacing: .02em;
+    }
+    .brand-mark {
+      width: 34px; height: 34px;
+      display: grid; place-items: center;
+      border: 1px solid var(--terracotta);
+      border-radius: 50%;
+      color: var(--terracotta);
+      font-size: 1.05rem;
+    }
+    .nav-link {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 600;
+    }
+    .nav-link:hover { color: var(--terracotta-dark); }
+
+    .hero { padding: 38px 0 76px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr);
+      align-items: center;
+      gap: clamp(44px, 7vw, 100px);
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 18px;
+      color: var(--terracotta-dark);
+      font-size: .74rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 35px; height: 1px; background: var(--terracotta); }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; line-height: 1.1; }
+    h1 { font-size: clamp(3.15rem, 6vw, 5.55rem); letter-spacing: -.055em; margin: 0 0 25px; max-width: 690px; }
+    .hero-copy { color: var(--ink-soft); font-size: 1.1rem; max-width: 530px; margin: 0 0 31px; }
+    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 17px; }
+    .button {
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 14px 23px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-weight: 800;
+      font-size: .93rem;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--terracotta); color: white; box-shadow: 0 8px 20px rgba(184, 101, 78, .23); }
+    .button-primary:hover { background: var(--terracotta-dark); box-shadow: 0 11px 24px rgba(184, 101, 78, .28); }
+    .button-quiet { background: transparent; color: var(--ink); padding-left: 3px; }
+    .button-quiet:hover { color: var(--terracotta-dark); }
+    .price-note { margin: 16px 0 0; font-size: .88rem; color: var(--ink-soft); }
+    .price-note strong { color: var(--ink); }
+
+    .book-stage { min-height: 505px; position: relative; display: grid; place-items: center; }
+    .book-shadow { position: absolute; width: 72%; height: 37px; bottom: 37px; border-radius: 50%; background: rgba(57, 48, 36, .18); filter: blur(20px); transform: rotate(-7deg); }
+    .book {
+      position: relative;
+      width: min(420px, 85%);
+      aspect-ratio: .79;
+      transform: rotate(-6deg);
+      border-radius: 4px 13px 13px 4px;
+      overflow: hidden;
+      color: #fffaf0;
+      background: #a95d49;
+      box-shadow: 15px 22px 0 #e1d5c2, 20px 28px 38px rgba(48, 42, 31, .25);
+    }
+    .book::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 28% 22%, rgba(249, 220, 149, .66) 0 1px, transparent 2px), radial-gradient(circle at 70% 63%, rgba(249, 220, 149, .42) 0 1px, transparent 2px), linear-gradient(135deg, transparent 30%, rgba(255,255,255,.1) 30% 31%, transparent 31% 68%, rgba(255,255,255,.08) 68% 69%, transparent 69%);
+      background-size: 34px 34px, 41px 41px, auto;
+      opacity: .55;
+    }
+    .book::after { content: ""; position: absolute; top: 0; bottom: 0; left: 20px; width: 2px; background: rgba(74, 39, 32, .18); box-shadow: 5px 0 0 rgba(255,255,255,.1); }
+    .book-content { position: absolute; inset: 26px 27px 28px 40px; border: 1px solid rgba(255, 238, 195, .65); display: flex; flex-direction: column; align-items: center; text-align: center; padding: 38px 21px 25px; }
+    .book-ornament { font-size: 2.4rem; color: #eed39c; line-height: 1; margin-bottom: 40px; }
+    .book-kicker { font-size: .57rem; letter-spacing: .22em; text-transform: uppercase; color: #f3dca9; }
+    .book h2 { font-size: clamp(2.4rem, 5vw, 3.8rem); line-height: .93; margin: 18px 0 19px; letter-spacing: -.05em; }
+    .book-rule { width: 55px; height: 1px; background: #efd49e; margin-bottom: 18px; }
+    .book-subtitle { font-family: Georgia, serif; font-size: .9rem; color: #f6e2b8; line-height: 1.45; }
+    .book-credit { margin-top: auto; font-size: .57rem; letter-spacing: .18em; text-transform: uppercase; color: #f3dca9; }
+    .stamp { position: absolute; z-index: 2; right: 0; top: 45px; transform: rotate(8deg); width: 92px; height: 92px; display: grid; place-items: center; text-align: center; border: 1px solid var(--gold); border-radius: 50%; background: var(--olive); color: #fff9ed; font-family: Georgia, serif; font-size: .75rem; line-height: 1.1; box-shadow: 0 7px 18px rgba(0,0,0,.12); }
+    .stamp span { display: block; font-size: .54rem; text-transform: uppercase; letter-spacing: .12em; font-family: inherit; margin-bottom: 5px; }
+
+    .details { padding: 31px 0 92px; }
+    .details-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .detail { padding: 28px 28px 28px 0; margin-right: 28px; border-right: 1px solid var(--line); }
+    .detail:last-child { border-right: 0; margin-right: 0; }
+    .detail-number { color: var(--terracotta); font-family: Georgia, serif; font-size: 1.25rem; }
+    .detail h3 { font-size: 1.32rem; margin: 10px 0 8px; }
+    .detail p { color: var(--ink-soft); margin: 0; font-size: .92rem; }
+
+    .order-section { padding: 78px 0 104px; background: #ede8dd; }
+    .section-intro { text-align: center; max-width: 680px; margin: 0 auto 42px; }
+    .section-intro .eyebrow { justify-content: center; }
+    .section-intro .eyebrow::before { display: none; }
+    h2.section-title { font-size: clamp(2.4rem, 5vw, 4.1rem); letter-spacing: -.045em; margin: 0 0 15px; }
+    .section-intro p { color: var(--ink-soft); margin: 0 auto; max-width: 560px; }
+    .order-layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(300px, .8fr); gap: 25px; align-items: start; }
+    .card { background: var(--paper); border: 1px solid rgba(222, 215, 200, .9); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .form-card { padding: clamp(24px, 4vw, 42px); }
+    .form-card h3, .summary-card h3 { font-size: 1.65rem; margin: 0 0 7px; }
+    .form-lede { margin: 0 0 28px; color: var(--ink-soft); font-size: .9rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 17px 19px; }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    label { color: var(--ink); font-size: .8rem; font-weight: 800; letter-spacing: .02em; }
+    label .optional { font-weight: 500; color: #8a8d83; }
+    input, select, textarea { width: 100%; border: 1px solid var(--line); border-radius: 9px; background: #fffefa; color: var(--ink); padding: 12px 13px; outline: none; transition: border .18s, box-shadow .18s; }
+    input:focus, select:focus, textarea:focus { border-color: var(--terracotta); box-shadow: 0 0 0 3px rgba(184, 101, 78, .13); }
+    textarea { resize: vertical; min-height: 84px; }
+    .address-heading { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 23px; margin-top: 4px; }
+    .address-heading strong { font-family: Georgia, serif; font-size: 1.15rem; font-weight: 400; }
+    .address-heading span { color: var(--ink-soft); font-size: .77rem; }
+    .payment-heading { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 23px; margin-top: 5px; font-family: Georgia, serif; font-size: 1.15rem; }
+    .payment-options { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .payment-option { position: relative; }
+    .payment-option input { position: absolute; opacity: 0; pointer-events: none; }
+    .payment-label { display: flex; align-items: center; gap: 12px; border: 1px solid var(--line); border-radius: 10px; padding: 13px 15px; cursor: pointer; min-height: 63px; transition: border .18s, background .18s, box-shadow .18s; }
+    .payment-label:hover { border-color: var(--terracotta); }
+    .payment-option input:checked + .payment-label { border-color: var(--terracotta); background: #fff8f3; box-shadow: 0 0 0 2px rgba(184, 101, 78, .1); }
+    .payment-icon { width: 29px; height: 29px; flex: 0 0 29px; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: white; font-size: .75rem; font-weight: 800; }
+    .payment-option:nth-child(2) .payment-icon { background: var(--olive); }
+    .payment-label strong { display: block; font-size: .9rem; }
+    .payment-label small { color: var(--ink-soft); font-size: .73rem; }
+    .form-footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; border-top: 1px solid var(--line); margin-top: 27px; padding-top: 25px; }
+    .secure-note { color: var(--ink-soft); font-size: .76rem; }
+    .secure-note::before { content: "✦"; color: var(--gold); margin-right: 6px; }
+    .summary-card { padding: 29px; position: sticky; top: 18px; }
+    .summary-card h3 { margin-bottom: 17px; }
+    .summary-cover { height: 153px; border-radius: 11px; background: linear-gradient(135deg, #a95d49, #774b42); position: relative; overflow: hidden; color: #f7dfac; padding: 19px; display: flex; flex-direction: column; justify-content: space-between; }
+    .summary-cover::after { content: "✦  ✧  ✦"; position: absolute; right: -7px; bottom: 21px; color: rgba(247, 223, 172, .28); font-size: 2rem; transform: rotate(-24deg); }
+    .summary-cover small { font-size: .59rem; letter-spacing: .16em; text-transform: uppercase; }
+    .summary-cover strong { font-family: Georgia, serif; font-size: 1.85rem; line-height: .95; font-weight: 400; max-width: 170px; }
+    .summary-list { list-style: none; padding: 0; margin: 22px 0 17px; }
+    .summary-list li { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; color: var(--ink-soft); font-size: .88rem; border-bottom: 1px solid #eee8dc; }
+    .summary-list li:last-child { border: 0; }
+    .summary-list strong { color: var(--ink); text-align: right; }
+    .total-row { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--ink); padding-top: 17px; }
+    .total-row span { font-size: .78rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 800; }
+    .total-row strong { font-family: Georgia, serif; font-size: 1.85rem; font-weight: 400; }
+    .summary-help { margin: 18px 0 0; padding: 13px; border-radius: 9px; background: #f1eee3; color: var(--ink-soft); font-size: .76rem; }
+
+    .confirmation { display: none; }
+    .confirmation.show { display: block; }
+    .confirmation-card { max-width: 830px; margin: 0 auto; padding: clamp(25px, 5vw, 54px); }
+    .confirmation-top { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 28px; }
+    .check { width: 39px; height: 39px; flex: 0 0 39px; display: grid; place-items: center; border-radius: 50%; background: var(--olive); color: white; font-weight: bold; }
+    .confirmation h3 { font-size: 2.1rem; margin: 0 0 6px; }
+    .confirmation-top p { margin: 0; color: var(--ink-soft); }
+    .confirm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 23px; }
+    .instruction { padding: 21px; border-radius: 12px; background: #f3eee4; border: 1px solid var(--line); }
+    .instruction h4 { margin: 0 0 9px; font-family: Georgia, serif; font-size: 1.15rem; font-weight: 400; }
+    .instruction p { color: var(--ink-soft); margin: 0; font-size: .88rem; }
+    .instruction .button { margin-top: 17px; }
+    .payid-box { display: inline-block; background: #fffdf8; border: 1px dashed var(--terracotta); color: var(--terracotta-dark); font: 800 1.18rem/1.1 Georgia, serif; padding: 9px 12px; margin: 5px 0 11px; letter-spacing: .05em; }
+    .order-summary { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; margin-bottom: 23px; }
+    .order-summary-title { padding: 11px 17px; background: var(--ink); color: #fffaf0; font-size: .72rem; text-transform: uppercase; letter-spacing: .13em; font-weight: 800; }
+    .order-summary dl { display: grid; grid-template-columns: 140px 1fr; gap: 0; margin: 0; padding: 7px 17px; font-size: .88rem; }
+    .order-summary dt, .order-summary dd { padding: 7px 0; margin: 0; border-bottom: 1px solid #eee8dc; }
+    .order-summary dt { color: var(--ink-soft); }
+    .order-summary dd { font-weight: 600; word-break: break-word; }
+    .order-summary dl > :nth-last-child(-n+2) { border-bottom: 0; }
+    .confirm-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .back-button { border: 0; background: transparent; color: var(--ink-soft); font-size: .85rem; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+    .next-note { font-size: .78rem; color: var(--ink-soft); margin: 17px 0 0; }
+    .email-link { color: var(--terracotta-dark); font-weight: 700; }
+
+    footer { padding: 28px 0 37px; background: var(--ink); color: #e8e1d3; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: .79rem; }
+    footer a { color: #f5d6a9; }
+
+    @media (max-width: 850px) {
+      .hero-grid, .order-layout { grid-template-columns: 1fr; }
+      .hero { padding-top: 20px; }
+      .book-stage { min-height: 450px; order: -1; }
+      .hero-copy { max-width: 650px; }
+      .summary-card { position: static; }
+      .summary-cover { height: 140px; }
+    }
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 28px, 560px); }
+      .topline { font-size: .66rem; letter-spacing: .09em; }
+      header { padding: 18px 0; }
+      .nav-link { display: none; }
+      .hero { padding-bottom: 50px; }
+      h1 { font-size: clamp(2.75rem, 15vw, 4.1rem); }
+      .hero-copy { font-size: 1rem; }
+      .book-stage { min-height: 365px; }
+      .book { width: min(290px, 72%); }
+      .book-content { inset: 18px 20px 19px 30px; padding: 25px 12px 17px; }
+      .book-ornament { font-size: 1.8rem; margin-bottom: 25px; }
+      .book h2 { font-size: 2.55rem; }
+      .stamp { width: 76px; height: 76px; right: 6%; top: 30px; font-size: .64rem; }
+      .details { padding-bottom: 58px; }
+      .details-grid { grid-template-columns: 1fr; }
+      .detail { border-right: 0; border-bottom: 1px solid var(--line); margin-right: 0; padding: 22px 0; }
+      .detail:last-child { border-bottom: 0; }
+      .order-section { padding: 57px 0 70px; }
+      .form-grid, .confirm-grid, .payment-options { grid-template-columns: 1fr; }
+      .field.full, .address-heading, .payment-heading, .payment-options { grid-column: auto; }
+      .address-heading { margin-top: 4px; }
+      .form-card { padding: 22px 18px; }
+      .form-footer { align-items: flex-start; flex-direction: column-reverse; }
+      .form-footer .button { width: 100%; }
+      .summary-card { padding: 21px; }
+      .confirmation-card { padding: 23px 18px; }
+      .confirmation h3 { font-size: 1.85rem; }
+      .confirmation-top { margin-bottom: 23px; }
+      .order-summary dl { grid-template-columns: 105px 1fr; padding-left: 13px; padding-right: 13px; }
+      .confirm-actions .button { width: 100%; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline">A keepsake from the road • $60 AUD per copy</div>
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="Journey of Grace home"><span class="brand-mark">✦</span> Journey of Grace</a>
+      <a class="nav-link" href="#order">Order a copy <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">A pilgrimage in photographs</p>
+          <h1>Stories carried home.</h1>
+          <p class="hero-copy">A warm, hardcover photobook of the Turkey, Croatia and Medjugorje pilgrimage — made to revisit slowly, share around the parish and keep close for years to come.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#order">Reserve your copy <span aria-hidden="true">↘</span></a>
+            <a class="button button-quiet" href="#inside">What’s inside <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="price-note"><strong>$60 AUD</strong> per hardcover copy &nbsp;·&nbsp; approx. 60 pages &nbsp;·&nbsp; A4 landscape storybook</p>
+        </div>
+        <div class="book-stage" aria-label="Illustration of the Journey of Grace photobook">
+          <div class="book-shadow"></div>
+          <div class="book">
+            <div class="book-content">
+              <div class="book-ornament" aria-hidden="true">✦</div>
+              <div class="book-kicker">A visual keepsake</div>
+              <h2>Journey<br>of Grace</h2>
+              <div class="book-rule"></div>
+              <div class="book-subtitle">Turkey · Croatia<br>· Medjugorje ·</div>
+              <div class="book-credit">Justin Tan</div>
+            </div>
+          </div>
+          <div class="stamp"><div><span>Travel with</span>heart</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="details" id="inside">
+      <div class="shell details-grid">
+        <div class="detail"><div class="detail-number">01</div><h3>Three places, one journey</h3><p>From ancient paths in Turkey to the Adriatic coast and the quiet hills of Medjugorje.</p></div>
+        <div class="detail"><div class="detail-number">02</div><h3>A book to pass around</h3><p>Landscape pages, generous photographs and a storybook feel made for sharing.</p></div>
+        <div class="detail"><div class="detail-number">03</div><h3>Made as a keepsake</h3><p>A hardcover memento of prayer, friendship, discovery and the moments between.</p></div>
+      </div>
+    </section>
+
+    <section class="order-section" id="order">
+      <div class="shell">
+        <div class="section-intro">
+          <p class="eyebrow">Order with care</p>
+          <h2 class="section-title">Bring one home.</h2>
+          <p>Fill in your details below. You’ll see your order summary and payment instructions before anything is sent.</p>
+        </div>
+
+        <div id="orderView">
+          <div class="order-layout">
+            <form class="card form-card" id="orderForm" novalidate>
+              <h3>Your order details</h3>
+              <p class="form-lede">All fields marked <strong>*</strong> help us prepare your order.</p>
+              <div class="form-grid">
+                <div class="field full">
+                  <label for="fullName">Full name <span aria-hidden="true">*</span></label>
+                  <input id="fullName" name="fullName" type="text" autocomplete="name" required placeholder="e.g. Maria Rossi">
+                </div>
+                <div class="field">
+                  <label for="email">Email <span aria-hidden="true">*</span></label>
+                  <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+                </div>
+                <div class="field">
+                  <label for="phone">Phone <span class="optional">(optional)</span></label>
+                  <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="0400 000 000">
+                </div>
+                <div class="field">
+                  <label for="quantity">Quantity <span aria-hidden="true">*</span></label>
+                  <input id="quantity" name="quantity" type="number" min="1" step="1" value="1" required inputmode="numeric">
+                </div>
+                <div class="field full">
+                  <label for="street">Shipping address — street <span aria-hidden="true">*</span></label>
+                  <input id="street" name="street" type="text" autocomplete="street-address" required placeholder="Street address">
+                </div>
+                <div class="address-heading"><strong>Where should we send it?</strong><span>Australia is selected by default</span></div>
+                <div class="field">
+                  <label for="suburb">Suburb / town <span aria-hidden="true">*</span></label>
+                  <input id="suburb" name="suburb" type="text" autocomplete="address-level2" required>
+                </div>
+                <div class="field">
+                  <label for="state">State / territory <span aria-hidden="true">*</span></label>
+                  <input id="state" name="state" type="text" autocomplete="address-level1" required placeholder="e.g. NSW">
+                </div>
+                <div class="field">
+                  <label for="postcode">Postcode <span aria-hidden="true">*</span></label>
+                  <input id="postcode" name="postcode" type="text" autocomplete="postal-code" required inputmode="numeric">
+                </div>
+                <div class="field">
+                  <label for="country">Country <span aria-hidden="true">*</span></label>
+                  <input id="country" name="country" type="text" autocomplete="country-name" value="Australia" required>
+                </div>
+                <div class="payment-heading">Choose a payment method</div>
+                <div class="payment-options">
+                  <div class="payment-option">
+                    <input id="payPal" name="payment" type="radio" value="PayPal" checked>
+                    <label class="payment-label" for="payPal"><span class="payment-icon">P</span><span><strong>PayPal</strong><small>Pay securely online</small></span></label>
+                  </div>
+                  <div class="payment-option">
+                    <input id="payId" name="payment" type="radio" value="PayID">
+                    <label class="payment-label" for="payId"><span class="payment-icon">$</span><span><strong>PayID</strong><small>Pay from your banking app</small></span></label>
+                  </div>
+                </div>
+                <div class="field full">
+                  <label for="notes">Notes <span class="optional">(optional)</span></label>
+                  <textarea id="notes" name="notes" placeholder="Anything we should know about your order?"></textarea>
+                </div>
+              </div>
+              <div class="form-footer">
+                <div class="secure-note">No payment is taken on this page.</div>
+                <button class="button button-primary" type="submit">Continue to payment <span aria-hidden="true">→</span></button>
+              </div>
+            </form>
+
+            <aside class="card summary-card" aria-label="Order summary">
+              <h3>Your keepsake</h3>
+              <div class="summary-cover"><small>Hardcover photobook</small><strong>Journey<br>of Grace</strong><small>Turkey · Croatia · Medjugorje</small></div>
+              <ul class="summary-list">
+                <li><span>Format</span><strong>A4 landscape</strong></li>
+                <li><span>Length</span><strong>Approx. 60 pages</strong></li>
+                <li><span>Price</span><strong>$60 AUD / copy</strong></li>
+              </ul>
+              <div class="total-row"><span>Order total</span><strong id="liveTotal">$60</strong></div>
+              <p class="summary-help">Your total updates as you choose the quantity. Shipping arrangements will be confirmed by email.</p>
+            </aside>
+          </div>
+        </div>
+
+        <div class="confirmation" id="confirmation" aria-live="polite" tabindex="-1">
+          <div class="card confirmation-card">
+            <div class="confirmation-top"><div class="check" aria-hidden="true">✓</div><div><h3>Thank you, <span id="confirmName">friend</span>.</h3><p>Your order is ready for the next step. Please complete payment, then email the order details to Justin.</p></div></div>
+            <div class="confirm-grid">
+              <div class="instruction" id="paypalInstruction">
+                <h4>Pay with PayPal</h4>
+                <p id="paypalCopy">Use the button below to pay your order total. If you ordered more than one copy, the amount is already set to the full total.</p>
+                <a class="button button-primary" id="paypalLink" href="https://paypal.me/pilgrimagephotobook/60AUD" target="_blank" rel="noopener">Open PayPal <span aria-hidden="true">↗</span></a>
+              </div>
+              <div class="instruction" id="payidInstruction" style="display:none">
+                <h4>Pay with PayID</h4>
+                <p>Send <strong id="payidTotal">$60 AUD</strong> to this PayID. Use your surname followed by “BOOK” as the payment reference.</p>
+                <div class="payid-box">0406 498 806</div>
+                <p>After paying, email your order details using the button below so Justin can confirm and arrange delivery.</p>
+              </div>
+            </div>
+            <div class="order-summary">
+              <div class="order-summary-title">Your order summary</div>
+              <dl>
+                <dt>Name</dt><dd id="summaryName">—</dd>
+                <dt>Quantity</dt><dd id="summaryQuantity">—</dd>
+                <dt>Total</dt><dd id="summaryTotal">—</dd>
+                <dt>Ship to</dt><dd id="summaryAddress">—</dd>
+                <dt>Payment</dt><dd id="summaryPayment">—</dd>
+              </dl>
+            </div>
+            <div class="confirm-actions">
+              <a class="button button-primary" id="emailLink" href="mailto:justin@tuenproductions.com">Email order details <span aria-hidden="true">→</span></a>
+              <button class="back-button" id="editOrder" type="button">← Edit order</button>
+            </div>
+            <p class="next-note">The email button opens your usual email app with the order details prefilled. Please send it after making payment. Questions? Contact <a class="email-link" href="mailto:justin@tuenproductions.com">justin@tuenproductions.com</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="shell footer-inner"><span>Journey of Grace · A pilgrimage photobook by Justin Tan</span><a href="mailto:justin@tuenproductions.com">justin@tuenproductions.com</a></div></footer>
+
+  <script>
+    (() => {
+      const PRICE = 60;
+      const form = document.getElementById('orderForm');
+      const quantity = document.getElementById('quantity');
+      const liveTotal = document.getElementById('liveTotal');
+      const confirmation = document.getElementById('confirmation');
+      const orderView = document.getElementById('orderView');
+      const money = value => `$${value.toLocaleString('en-AU')} AUD`;
+      const safeQuantity = () => Math.max(1, Math.floor(Number(quantity.value) || 1));
+
+      function updateTotal() {
+        const total = safeQuantity() * PRICE;
+        liveTotal.textContent = money(total).replace(' AUD', '');
+        quantity.value = safeQuantity();
+      }
+      quantity.addEventListener('input', updateTotal);
+      quantity.addEventListener('change', updateTotal);
+      updateTotal();
+
+      function value(name) { return form.elements[name].value.trim(); }
+      function escapeMail(text) { return text.replace(/\r?\n/g, ' ').trim(); }
+
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        const data = {
+          name: value('fullName'), email: value('email'), phone: value('phone'), quantity: safeQuantity(),
+          street: value('street'), suburb: value('suburb'), state: value('state'), postcode: value('postcode'), country: value('country'),
+          payment: form.elements.payment.value, notes: value('notes')
+        };
+        const total = data.quantity * PRICE;
+        const address = `${data.street}, ${data.suburb}, ${data.state} ${data.postcode}, ${data.country}`;
+        const subject = `Pilgrimage photobook order — ${data.name}`;
+        const body = [
+          'Hello Justin,', '', 'I have placed an order for the Turkey / Croatia / Medjugorje pilgrimage photobook.', '',
+          `Name: ${escapeMail(data.name)}`, `Email: ${escapeMail(data.email)}`, `Phone: ${escapeMail(data.phone || 'Not provided')}`,
+          `Quantity: ${data.quantity}`, `Total: ${money(total)}`, `Shipping address: ${escapeMail(address)}`, `Payment method: ${data.payment}`,
+          `Notes: ${escapeMail(data.notes || 'None')}`, '', 'Payment has been made / will be made as instructed.', '', 'Thank you.'
+        ].join('\n');
+        document.getElementById('confirmName').textContent = data.name.split(/\s+/)[0];
+        document.getElementById('summaryName').textContent = data.name;
+        document.getElementById('summaryQuantity').textContent = `${data.quantity} ${data.quantity === 1 ? 'copy' : 'copies'}`;
+        document.getElementById('summaryTotal').textContent = money(total);
+        document.getElementById('summaryAddress').textContent = address;
+        document.getElementById('summaryPayment').textContent = data.payment;
+        document.getElementById('payidTotal').textContent = money(total);
+        const paypalUrl = `https://paypal.me/pilgrimagephotobook/${total}AUD`;
+        const paypalLink = document.getElementById('paypalLink');
+        paypalLink.href = paypalUrl;
+        document.getElementById('paypalCopy').textContent = data.quantity > 1
+          ? `Use the button below to pay the full order total of ${money(total)}. The amount is set for ${data.quantity} copies.`
+          : `Use the button below to pay ${money(total)} for your photobook.`;
+        document.getElementById('paypalInstruction').style.display = data.payment === 'PayPal' ? '' : 'none';
+        document.getElementById('payidInstruction').style.display = data.payment === 'PayID' ? '' : 'none';
+        const mailto = `mailto:justin@tuenproductions.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        document.getElementById('emailLink').href = mailto;
+        orderView.style.display = 'none';
+        confirmation.classList.add('show');
+        confirmation.focus();
+        window.location.hash = 'confirmation';
+      });
+
+      document.getElementById('editOrder').addEventListener('click', () => {
+        confirmation.classList.remove('show');
+        orderView.style.display = '';
+        document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+      });
+    })();
+  </script>
+</body>
+</html>

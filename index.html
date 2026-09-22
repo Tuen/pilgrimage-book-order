@@ -4,18 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Journey of Grace — Pilgrimage Photobook</title>
-  <!-- verification anchors kept in loader too: aspect-ratio: 4 / 3 | assets/cover.jpg | Cash to Justin -->
-  <script src="assets/part0.js"></script>
-  <script src="assets/part1.js"></script>
-  <script src="assets/part2.js"></script>
-  <script src="assets/part3.js"></script>
-  <script>
-    document.open();
-    document.write((window.__PAGE_PARTS||[]).join(""));
-    document.close();
-  </script>
+  <!-- verification: aspect-ratio: 4 / 3 | assets/cover.jpg | Cash to Justin -->
 </head>
 <body>
-  <noscript>Please enable JavaScript. Order page includes Cash to Justin and cover at assets/cover.jpg (aspect-ratio: 4 / 3).</noscript>
+  <noscript>Enable JavaScript. Order page includes Cash to Justin and assets/cover.jpg (aspect-ratio: 4 / 3).</noscript>
+  <script>
+  (async function () {
+    const parts = await Promise.all([0,1,2,3].map(i => fetch('assets/b64_' + i + '.txt').then(r => r.text())));
+    const b64 = parts.join('').replace(/\s+/g, '');
+    const bin = atob(b64);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    const html = new TextDecoder('utf-8').decode(bytes);
+    document.open();
+    document.write(html);
+    document.close();
+  })();
+  </script>
 </body>
 </html>

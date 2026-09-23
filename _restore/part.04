@@ -1,0 +1,119 @@
+>← Edit order</button>
+            </div>
+            <p class="next-note">Justin is notified automatically when you continue. The email button is only a backup if you want to send the details yourself. Questions? Contact <a class="email-link" href="mailto:justin@tuenproductions.com">justin@tuenproductions.com</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="shell footer-inner"><span>Journey of Grace · A pilgrimage photobook by Justin Tan</span><a href="mailto:justin@tuenproductions.com">justin@tuenproductions.com</a></div></footer>
+
+  <script>
+    (() => {
+      const PRICE = 60;
+      const form = document.getElementById('orderForm');
+      const quantity = document.getElementById('quantity');
+      const liveTotal = document.getElementById('liveTotal');
+      const confirmation = document.getElementById('confirmation');
+      const orderView = document.getElementById('orderView');
+      const money = value => `$${value.toLocaleString('en-AU')} AUD`;
+      const safeQuantity = () => Math.max(1, Math.floor(Number(quantity.value) || 1));
+
+      function updateTotal() {
+        const total = safeQuantity() * PRICE;
+        liveTotal.textContent = money(total).replace(' AUD', '');
+        quantity.value = safeQuantity();
+      }
+      quantity.addEventListener('input', updateTotal);
+      quantity.addEventListener('change', updateTotal);
+      updateTotal();
+
+      function value(name) { return form.elements[name].value.trim(); }
+      function escapeMail(text) { return text.replace(/\r?\n/g, ' ').trim(); }
+
+      const NOTIFY_URL = 'https://formsubmit.co/ajax/65c4b5fc74cd890a8a2a6ca74d704353';
+      const submitBtn = form.querySelector('button[type="submit"]');
+
+      function showConfirmation(data, total, address, subject, body, notifyState) {
+        document.getElementById('confirmName').textContent = data.name.split(/\s+/)[0];
+        document.getElementById('summaryName').textContent = data.name;
+        document.getElementById('summaryQuantity').textContent = `${data.quantity} ${data.quantity === 1 ? 'copy' : 'copies'}`;
+        document.getElementById('summaryTotal').textContent = money(total);
+        document.getElementById('summaryAddress').textContent = address;
+        document.getElementById('payidTotal').textContent = money(total);
+        const paypalUrl = `https://paypal.me/pilgrimagephotobook/${total}AUD`;
+        const paypalLink = document.getElementById('paypalLink');
+        paypalLink.href = paypalUrl;
+        document.getElementById('paypalCopy').textContent = data.quantity > 1
+          ? `Use the button below to pay the full order total of ${money(total)}. The amount is set for ${data.quantity} copies.`
+          : `Use the button below to pay ${money(total)} for your photobook.`;
+        const paymentLabel = data.payment === 'Cash' ? 'Cash to Justin' : data.payment;
+        document.getElementById('summaryPayment').textContent = paymentLabel;
+        document.getElementById('cashCopy').innerHTML = data.payment === 'Cash'
+          ? `Please give <strong>${money(total)}</strong> in cash to Justin for this order.`
+          : document.getElementById('cashCopy').innerHTML;
+        document.getElementById('paypalInstruction').style.display = data.payment === 'PayPal' ? '' : 'none';
+        document.getElementById('payidInstruction').style.display = data.payment === 'PayID' ? '' : 'none';
+        document.getElementById('cashInstruction').style.display = data.payment === 'Cash' ? '' : 'none';
+        const mailto = `mailto:justin@tuenproductions.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        document.getElementById('emailLink').href = mailto;
+
+        const status = document.getElementById('notifyStatus');
+        if (notifyState === 'ok') {
+          status.style.display = 'none';
+          status.textContent = '';
+          document.querySelector('.confirmation-top p').textContent =
+            'Your order details have been sent to Justin. Please complete payment using the instructions below.';
+        } else if (notifyState === 'pending_activation') {
+          status.style.display = '';
+          status.textContent = 'Order saved on this page. Justin may need to activate email delivery once — please also tap “Email backup copy” below so he receives your details.';
+          document.querySelector('.confirmation-top p').textContent =
+            'Please complete payment, and use the backup email button so Justin receives your order details.';
+        } else {
+          status.style.display = '';
+          status.textContent = 'Automatic notification could not be sent just now. Please tap “Email backup copy” below so Justin receives your order details.';
+          document.querySelector('.confirmation-top p').textContent =
+            'Please complete payment, and use the backup email button so Justin receives your order details.';
+        }
+
+        orderView.style.display = 'none';
+        confirmation.classList.add('show');
+        confirmation.focus();
+        window.location.hash = 'confirmation';
+      }
+
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+        const data = {
+          name: value('fullName'), email: value('email'), phone: value('phone'), quantity: safeQuantity(),
+          street: value('street'), suburb: value('suburb'), state: value('state'), postcode: value('postcode'), country: value('country'),
+          payment: form.elements.payment.value, notes: value('notes')
+        };
+        const total = data.quantity * PRICE;
+        const address = `${data.street}, ${data.suburb}, ${data.state} ${data.postcode}, ${data.country}`;
+        const subject = `Pilgrimage photobook order — ${data.name}`;
+        const body = [
+          'Hello Justin,', '', 'I have placed an order for the Turkey / Croatia / Medjugorje pilgrimage photobook.', '',
+          `Name: ${escapeMail(data.name)}`, `Email: ${escapeMail(data.email)}`, `Phone: ${escapeMail(data.phone || 'Not provided')}`,
+          `Quantity: ${data.quantity}`, `Total: ${money(total)}`, `Shipping address: ${escapeMail(address)}`, `Payment method: ${data.payment === "Cash" ? "Cash to Justin" : data.payment}`,
+          `Notes: ${escapeMail(data.notes || 'None')}`, '', 'Payment has been made / will be made as instructed.', '', 'Thank you.'
+        ].join('\n');
+
+        const previousLabel = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = 'Sending order…';
+
+        let notifyState = 'error';
+        try {
+          const response = await fetch(NOTIFY_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              name: data.name,
+              email: data.email,
+              phone: data.phone || 'Not provide

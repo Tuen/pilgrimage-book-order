@@ -1,0 +1,129 @@
+padding: 7px 0; margin: 0; border-bottom: 1px solid #eee8dc; }
+    .order-summary dt { color: var(--ink-soft); }
+    .order-summary dd { font-weight: 600; word-break: break-word; }
+    .order-summary dl > :nth-last-child(-n+2) { border-bottom: 0; }
+    .confirm-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .back-button { border: 0; background: transparent; color: var(--ink-soft); font-size: .85rem; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+    .next-note { font-size: .78rem; color: var(--ink-soft); margin: 17px 0 0; }
+    .email-link { color: var(--terracotta-dark); font-weight: 700; }
+
+    footer { padding: 28px 0 37px; background: var(--ink); color: #e8e1d3; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: .79rem; }
+    footer a { color: #f5d6a9; }
+
+    @media (max-width: 850px) {
+      .hero-grid, .order-layout { grid-template-columns: 1fr; }
+      .hero { padding-top: 20px; }
+      .book-stage { min-height: 450px; order: -1; }
+      .hero-copy { max-width: 650px; }
+      .summary-card { position: static; }
+      .summary-cover { height: 140px; }
+    }
+    @media (max-width: 620px) {
+      .shell { width: min(100% - 28px, 560px); }
+      .topline { font-size: .66rem; letter-spacing: .09em; }
+      header { padding: 18px 0; }
+      .nav-link { display: none; }
+      .hero { padding-bottom: 50px; }
+      h1 { font-size: clamp(2.75rem, 15vw, 4.1rem); }
+      .hero-copy { font-size: 1rem; }
+      .book-stage { min-height: 365px; }
+      .book { width: min(340px, 92%); }
+      .book-content { inset: 18px 20px 19px 30px; padding: 25px 12px 17px; }
+      .book-ornament { font-size: 1.8rem; margin-bottom: 25px; }
+      .book h2 { font-size: 2.55rem; }
+      .stamp { width: 76px; height: 76px; right: 6%; top: 30px; font-size: .64rem; }
+      .details { padding-bottom: 58px; }
+      .details-grid { grid-template-columns: 1fr; }
+      .detail { border-right: 0; border-bottom: 1px solid var(--line); margin-right: 0; padding: 22px 0; }
+      .detail:last-child { border-bottom: 0; }
+      .order-section { padding: 57px 0 70px; }
+      .form-grid, .confirm-grid, .payment-options { grid-template-columns: 1fr; }
+      .field.full, .address-heading, .payment-heading, .payment-options { grid-column: auto; }
+      .address-heading { margin-top: 4px; }
+      .form-card { padding: 22px 18px; }
+      .form-footer { align-items: flex-start; flex-direction: column-reverse; }
+      .form-footer .button { width: 100%; }
+      .summary-card { padding: 21px; }
+      .confirmation-card { padding: 23px 18px; }
+      .confirmation h3 { font-size: 1.85rem; }
+      .confirmation-top { margin-bottom: 23px; }
+      .order-summary dl { grid-template-columns: 105px 1fr; padding-left: 13px; padding-right: 13px; }
+      .confirm-actions .button { width: 100%; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline">A keepsake from the road • $60 AUD per copy</div>
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="Journey of Grace home"><span class="brand-mark">✦</span> Journey of Grace</a>
+      <a class="nav-link" href="#order">Order a copy <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div>
+          <p class="eyebrow">A pilgrimage in photographs</p>
+          <h1>Stories carried home.</h1>
+          <p class="hero-copy">A warm, hardcover photobook of the Turkey, Croatia and Medjugorje pilgrimage — made to revisit slowly, share around the parish and keep close for years to come.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#order">Reserve your copy <span aria-hidden="true">↘</span></a>
+            <a class="button button-quiet" href="#inside">What’s inside <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="price-note"><strong>$60 AUD</strong> per hardcover copy &nbsp;·&nbsp; approx. 60 pages &nbsp;·&nbsp; A4 landscape storybook</p>
+        </div>
+        <div class="book-stage" aria-label="Illustration of the Journey of Grace photobook">
+          <div class="book-shadow"></div>
+          <div class="book">
+            <div class="book-content">
+              <div class="book-ornament" aria-hidden="true">✦</div>
+              <div class="book-kicker">A visual keepsake</div>
+              <h2>Journey<br>of Grace</h2>
+              <div class="book-rule"></div>
+              <div class="book-subtitle">Turkey · Croatia<br>· Medjugorje ·</div>
+              
+            </div>
+          </div>
+          <div class="stamp"><div><span>Travel with</span>heart</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="details" id="inside">
+      <div class="shell details-grid">
+        <div class="detail"><div class="detail-number">01</div><h3>Three places, one journey</h3><p>From ancient paths in Turkey to the Adriatic coast and the quiet hills of Medjugorje.</p></div>
+        <div class="detail"><div class="detail-number">02</div><h3>A book to pass around</h3><p>Landscape pages, generous photographs and a storybook feel made for sharing.</p></div>
+        <div class="detail"><div class="detail-number">03</div><h3>Made as a keepsake</h3><p>A hardcover memento of prayer, friendship, discovery and the moments between.</p></div>
+      </div>
+    </section>
+
+    <section class="order-section" id="order">
+      <div class="shell">
+        <div class="section-intro">
+          <p class="eyebrow">Order with care</p>
+          <h2 class="section-title">Bring one home.</h2>
+          <p>Fill in your details below. Continuing sends your order to Justin, then shows payment instructions.</p>
+        </div>
+
+        <div id="orderView">
+          <div class="order-layout">
+            <form class="card form-card" id="orderForm" novalidate>
+              <h3>Your order details</h3>
+              <p class="form-lede">All fields marked <strong>*</strong> help us prepare your order.</p>
+              <div class="form-grid">
+                <div class="field full">
+                  <label for="fullName">Full name <span aria-hidden="true">*</span></label>
+                  <input id="fullName" name="fullName" type="text" autocomplete="name" required placeholder="e.g. Maria Rossi">
+                </div>
+                <div class="field">
+                  <label for="email">Email <span aria-hidden="true">*</span></label>
+                  <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+                </div>
+                <div class="field">
+                  <label for="phone">Phone <span class="optional">(optional)</span></label>
+                  <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="0400 000 000">
+       

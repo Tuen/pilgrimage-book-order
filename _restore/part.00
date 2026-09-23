@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Order the Turkey, Croatia & Medjugorje pilgrimage photobook by Justin Tan.">
+  <title>Journey of Grace — Pilgrimage Photobook</title>
+  <style>
+    :root {
+      --ink: #24312d;
+      --ink-soft: #53605a;
+      --cream: #f7f3ea;
+      --paper: #fffdf8;
+      --sand: #e8dfcf;
+      --terracotta: #b8654e;
+      --terracotta-dark: #934b3b;
+      --olive: #7d8761;
+      --olive-dark: #606a48;
+      --gold: #c69d55;
+      --line: #ded7c8;
+      --shadow: 0 18px 50px rgba(49, 44, 34, .12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    button, input, select, textarea { font: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+
+    .topline {
+      background: var(--ink);
+      color: #f4eee2;
+      text-align: center;
+      font-size: .76rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 10px 18px;
+    }
+    .shell { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+    header { padding: 24px 0; }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--ink);
+      text-decoration: none;
+      font-family: Georgia, serif;
+      font-size: 1.12rem;
+      letter-spacing: .02em;
+    }
+    .brand-mark {
+      width: 34px; height: 34px;
+      display: grid; place-items: center;
+      border: 1px solid var(--terracotta);
+      border-radius: 50%;
+      color: var(--terracotta);
+      font-size: 1.05rem;
+    }
+    .nav-link {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-size: .88rem;
+      font-weight: 600;
+    }
+    .nav-link:hover { color: var(--terracotta-dark); }
+
+    .hero { padding: 38px 0 76px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr);
+      align-items: center;
+      gap: clamp(44px, 7vw, 100px);
+    }
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 0 18px;
+      color: var(--terracotta-dark);
+      font-size: .74rem;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 35px; height: 1px; background: var(--terracotta); }
+    h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; line-height: 1.1; }
+    h1 { font-size: clamp(3.15rem, 6vw, 5.55rem); letter-spacing: -.055em; margin: 0 0 25px; max-width: 690px; }
+    .hero-copy { color: var(--ink-soft); font-size: 1.1rem; max-width: 530px; margin: 0 0 31px; }
+    .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 17px; }
+    .button {
+      border: 0;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 14px 23px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      font-weight: 800;
+      font-size: .93rem;
+      text-decoration: none;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { background: var(--terracotta); color: white; box-shadow: 0 8px 20px rgba(184, 101, 78, .23); }
+    .button-primary:hover { background: var(--terracotta-dark); box-shadow: 0 11px 24px rgba(184, 101, 78, .28); }
+    .button-quiet { background: transparent; color: var(--ink); padding-left: 3px; }
+    .button-quiet:hover { color: var(--terracotta-dark); }
+    .price-note { margin: 16px 0 0; font-size: .88rem; color: var(--ink-soft); }
+    .price-note strong { color: var(--ink); }
+
+    .book-stage { min-height: 505px; position: relative; display: grid; place-items: center; }
+    .book-shadow { position: absolute; width: 72%; height: 37px; bottom: 37px; border-radius: 50%; background: rgba(57, 48, 36, .18); filter: blur(20px); transform: rotate(-7deg); }
+    .book {
+      position: relative;
+      width: min(540px, 96%);
+      aspect-ratio: 4 / 3;
+      transform: rotate(-2.5deg);
+      border-radius: 6px 14px 14px 6px;
+      overflow: hidden;
+      color: #fffaf0;
+      background: #2a211c center / cover no-repeat;
+      background-image: linear-gradient(180deg, rgba(28,20,16,.22) 0%, rgba(28,20,16,.48) 48%, rgba(18,12,10,.78) 100%), url("assets/cover.jpg");
+      box-shadow: 12px 18px 0 #e1d5c2, 18px 24px 36px rgba(48, 42, 31, .28);
+    }
+    .book::before { content: none; }
+    .book::after { content: ""; position: absolute; top: 0; bottom: 0; left: 14px; width: 2px; background: rgba(74, 39, 32, .22); box-shadow: 4px 0 0 rgba(255,255,255,.12); }
+    .book-content {
+      position: absolute; inset: 16px 18px 16px 26px;
+      border: 1px solid rgba(255, 238, 195, .55);
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      text-align: center; padding: 18px 16px 16px;
+      text-shadow: 0 2px 14px rgba(0,0,0,.45);
+      background: linear-gradient(180deg, transparent 35%, rgba(12,8,6,.55) 100%);
+    }
+    .book-ornament { font-size: 1.45rem; color: #eed39c; line-height: 1; margin-bottom: 8px; }
+    .book-kicker { font-size: .55rem; letter-spacing: .22em; text-transform: uppercase; color: #f3dca9; }
+    .book h2 { font-size: clamp(1.85rem, 4vw, 2.85rem); line-height: .95; margin: 8px 0 10px; letter-spacing: -.03em; }
+    .book-rule { width: 48px; height: 1px; background: #efd49e; margin-bottom: 10px; }
+    .book-subtitle { font-family: Georgia, serif; font-size: .82rem; color: #f6e2b8; line-height: 1.4; }
+    .book-credit { display: none; }
+    .stamp { display: none; }
+    .stamp span { display: block; font-size: .54rem; text-transform: uppercase; letter-spacing: .12em; font-family: inherit; margin-bottom: 5px; }
+
+    .details { padding: 31px 0 92px; }
+    .details-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .detail { padding: 28px 28px 28px 0; margin-right: 28px; border-right: 1px solid var(--line); }
+    .detail:last-child { border-right: 0; margin-right: 0; }
+    .detail-number { color: var(--terracotta); font-family: Georgia, serif; font-size: 1.25rem; }
+    .detail h3 { font-size: 1.32rem; margin: 10px 0 8px; }
+    .detail p { color: var(--ink-soft); margin: 0; font-size: .92rem; }
+
+    .order-section { padding: 78px 0 104px; background: #ede8dd; }
+    .section-intro { text-align: center; max-width: 680px; margin: 0 auto 42px; }
+    .section-intro .eyebrow { justify-content: center; }
+    .section-intro .eyebrow::before

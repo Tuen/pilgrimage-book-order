@@ -11,10 +11,7 @@
   fetch(SOURCE)
     .then(r => r.text())
     .then(html => {
-      html = html.replace(
-        'https://formsubmit.co/ajax/justin@tuenproductions.com',
-        NOTIFY_URL
-      );
+      html = html.replace(/https:\/\/formsubmit\.co\/ajax\/[^'\"]+/, NOTIFY_URL);
       document.open();
       document.write(html);
       document.close();
